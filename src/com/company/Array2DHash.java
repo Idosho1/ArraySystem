@@ -1,18 +1,14 @@
 package com.company;
 
-public class Array2D {
+public class Array2DHash {
     protected int numberRows;
     protected int numberCols;
-    protected ArrayInterface array;
+    protected HashMap array;
 
-    public Array2D(int numberRows, int numberCols, boolean isSparse) {
+    public Array2DHash(int numberRows, int numberCols) {
         this.numberRows = numberRows;
         this.numberCols = numberCols;
-        if (isSparse) {
-            this.array = new SparseArray(numberRows*numberCols);
-        } else {
-            this.array = new FlexiArray(numberRows*numberCols);
-        }
+        this.array = new HashMap(numberRows*numberCols);
     }
 
     public int index(int r, int c) {

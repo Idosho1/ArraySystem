@@ -23,21 +23,23 @@ public class SparseArray implements ArrayInterface {
 
     public void set(int index, int value) {
         int ind = findKeyIndex(index);
-        if (ind == -1 && pointer < length()) {
-            keys.set(pointer,index);
-            values.set(pointer,value);
-            pointer += 1;
+        if (ind == -1) {
+            if (pointer < length()) {
+                keys.set(pointer, index);
+                values.set(pointer, value);
+                pointer += 1;
+            } else {System.exit(1);}
         } else {
-            values.set(ind,value);
+            values.set(ind, value);
         }
     }
 
     public int get(int index) {
-        int ind = findKeyIndex(index);
-        if (ind == -1) {
-            return 0;
-        }
-        return values.get(ind);
+            int ind = findKeyIndex(index);
+            if (ind == -1) {
+                return 0;
+            }
+            return values.get(ind);
     }
 
     public int length() {

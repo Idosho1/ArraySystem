@@ -1,4 +1,5 @@
 package com.company;
+import java.io.IOException;
 
 public class Main {
 
@@ -24,9 +25,57 @@ public class Main {
         a2d.set(5,5,12);
     }
 
-    public static void main(String[] args) {
-        testArray2D(true);
-	    /*FlexiArray flexi = new FlexiArray(5);
+    private static void testArray2DHash() {
+        int count = 0;
+        Array2DHash a2d = new Array2DHash(3,4);
+        for (int r = 0; r < 3; r++) {
+            for(int c = 0; c < 4; c++) {
+                a2d.set(r,c,count);
+                count += 1;
+            }
+        }
+        for (int r = 0; r < 3; r++) {
+            for(int c = 0; c < 4; c++) {
+                System.out.print(a2d.get(r,c) + " ");
+
+            }
+            System.out.println();
+        }
+        System.out.println("Number rows: " + a2d.numberRows());
+        System.out.println("Number cols: " + a2d.numberCols());
+        System.out.println("Now Crash it!!");
+        a2d.set(5,5,12);
+    }
+
+    public static void main(String[] args) throws IOException {
+        /*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Hello. Please write your name: ");
+        String name = br.readLine();
+        System.out.println("Your name is: "+name);*/
+        //testArray2DHash();
+        SimpleUI UI = new SimpleUI();
+        UI.run();
+        /*Colony col = new Colony(20);
+        col.setCellAlive(5,5);
+        col.setCellAlive(5,6);
+        col.setCellAlive(5,7);
+        col.setCellAlive(6,6);
+        System.out.println(col.toString());
+        col.evolve();
+        System.out.println(col.toString());
+        col.evolve();
+        System.out.println(col.toString());
+        col.evolve();
+        System.out.println(col.toString());
+        col.evolve();
+        System.out.println(col.toString());
+        col.evolve();
+        System.out.println(col.toString());
+        col.evolve();
+        System.out.println(col.toString());
+        col.evolve();
+        System.out.println(col.toString());
+	    FlexiArray flexi = new FlexiArray(5);
 	    flexi.set(0,59);
         flexi.set(1,21);
         flexi.set(2,34);
