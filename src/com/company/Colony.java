@@ -2,14 +2,14 @@ package com.company;
 
 public class Colony {
     protected int colonySize;
-    protected Array2DBHash cells;
+    protected Array2DB cells;
     protected int genNum;
 
 
     public Colony(int size) {
         this.colonySize = size;
         this.genNum = 0;
-        this.cells = new Array2DBHash(size,size);
+        this.cells = new Array2DB(size,size);
     }
 
     public int getColonySize() {
@@ -51,14 +51,7 @@ public class Colony {
     }
 
     public void evolve() {
-        Array2DBHash newCells = new Array2DBHash(colonySize,colonySize);
-        for(int r = 0; r < colonySize; r++) {
-            for (int c = 0; c < colonySize; c++) {
-                if(isCellAlive(r,c)) {
-                    newCells.set(r,c,1);
-                }
-            }
-        }
+        Array2DB newCells = new Array2DB(colonySize,colonySize);
 
         for(int r = 0; r < colonySize; r++) {
             for (int c = 0; c < colonySize; c++) {
@@ -70,7 +63,10 @@ public class Colony {
                         }
                     }
                 }
-                if(isCellAlive(r,c)) {alive--;}
+                if(isCellAlive(r,c)) {
+                    newCells.set(r,c,1);
+                    alive--;
+                }
                 if(alive < 2) {newCells.set(r,c,0);}
                 if(alive > 3) {newCells.set(r,c,0);}
                 if(alive == 3) {newCells.set(r,c,1);}
@@ -81,7 +77,7 @@ public class Colony {
     }
 
     public String toString() {
-        String result = "";
+        String result = "\n";
         result += ("Generation #" + getGenerationNumber()) + "\n";
         int n = 0;
         for(int r = 0; r < colonySize; r++) {
@@ -90,7 +86,7 @@ public class Colony {
                     if(isCellAlive(r,c)) {
                         result += "\n* ";
                     } else {
-                        result += "\n. ";
+                        result += "\n· ";
                     }
                     n = 0;
                 }
@@ -98,7 +94,7 @@ public class Colony {
                     if(isCellAlive(r,c)) {
                         result += "* ";
                     } else {
-                        result += ". ";
+                        result += "· ";
                     }
                 }
                 n++;
@@ -107,3 +103,5 @@ public class Colony {
         return result + "\n";
     }
 }
+
+

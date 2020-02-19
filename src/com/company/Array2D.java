@@ -5,6 +5,7 @@ public class Array2D {
     protected int numberCols;
     protected ArrayInterface array;
 
+    // Normal Constructor
     public Array2D(int numberRows, int numberCols, boolean isSparse) {
         this.numberRows = numberRows;
         this.numberCols = numberCols;
@@ -15,32 +16,34 @@ public class Array2D {
         }
     }
 
-    public int index(int r, int c) {
-        return (c + numberCols * (r));
+    // Hash Constructor
+    public Array2D(int numberRows, int numberCols) {
+        this.numberRows = numberRows;
+        this.numberCols = numberCols;
+        this.array = new HashMap(numberRows*numberCols);
     }
 
-    public boolean isInBounds(int r, int c) {
-        if (r>=0 && r<numberRows() && c>=0 && c<numberCols()) {
-            return true;
+    public int index(int r, int c) {
+        return (c + numberCols * r);
+    }
+
+    public void isInBounds(int r, int c) {
+        if (!(r>=0 && r<numberRows && c>=0 && c<numberCols)) {
+            System.out.println("Array2D Index out of range r: " + r + " col: " + c);
+            System.out.println("    maxRows: " + numberRows() + " maxCols: " + numberCols());
+            System.out.println("Java Result: 1");
+            System.exit(1);
         }
-        System.out.println("Array2D Index out of range r: " + r + " col: " + c);
-        System.out.println("    maxRows: " + numberRows() + " maxCols: " + numberCols());
-        System.out.println("Java Result: 1");
-        System.exit(1);
-        return false;
     }
 
     public void set(int r, int c, int value) {
-        if (isInBounds(r,c)) {
-            array.set(index(r, c), value);
-        }
+        isInBounds(r,c);
+        array.set(index(r, c), value);
     }
 
     public int get(int r, int c) {
-        if (isInBounds(r,c)) {
-            return array.get(index(r, c));
-        }
-        return 0;
+        isInBounds(r,c);
+        return array.get(index(r, c));
     }
 
     public int numberRows() {
@@ -51,4 +54,5 @@ public class Array2D {
         return numberCols;
     }
 }
+
 

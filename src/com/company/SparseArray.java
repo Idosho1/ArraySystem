@@ -28,18 +28,18 @@ public class SparseArray implements ArrayInterface {
                 keys.set(pointer, index);
                 values.set(pointer, value);
                 pointer += 1;
-            } else {System.exit(1);}
+            } else {throw new ArrayIndexOutOfBoundsException("Cannot add a new value. Size is already at max size: " + size);}
         } else {
             values.set(ind, value);
         }
     }
 
     public int get(int index) {
-            int ind = findKeyIndex(index);
-            if (ind == -1) {
-                return 0;
-            }
-            return values.get(ind);
+        int ind = findKeyIndex(index);
+        if (ind == -1) {
+            return 0;
+        }
+        return values.get(ind);
     }
 
     public int length() {

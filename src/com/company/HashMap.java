@@ -1,6 +1,6 @@
 package com.company;
 
-public class HashMap {
+public class HashMap implements ArrayInterface {
     protected int[] keys;
     protected int[] values;
     protected int size;
@@ -13,18 +13,22 @@ public class HashMap {
     }
 
     public int assignHashIndex(int k) {
-        Integer k_int = new Integer(k);
+        Integer k_int = k;
         return Math.abs(k_int.hashCode() % size);
     }
 
-    public void set(int k, int v) {
-        int ind = assignHashIndex(k);
-        keys[ind] = k;
-        values[ind] = v;
+    public void set(int index, int value) {
+        int ind = assignHashIndex(index);
+        keys[ind] = index;
+        values[ind] = value;
     }
 
-    public int get(int k) {
-        return values[assignHashIndex(k)];
+    public int get(int index) {
+        return values[assignHashIndex(index)];
     }
 
+    public int length() {
+        return size;
+    }
 }
+
